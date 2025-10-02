@@ -30,6 +30,27 @@
             animation: slideUpFade 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
+        /* Store Title */
+        .store-title {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .store-title h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: textGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes textGlow {
+            0%, 100% { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
+            50% { text-shadow: 2px 2px 20px rgba(255, 255, 255, 0.3); }
+        }
+
         /* Horizontal Navigation Tabs */
         .nav-tabs {
             display: flex;
@@ -95,7 +116,7 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
-        /* Contact Section - Admin Buttons */
+        /* Contact Section - Main Buttons */
         .contact-grid {
             display: grid;
             gap: 1.5rem;
@@ -104,12 +125,24 @@
             margin: 0 auto;
         }
 
-        .contact-category {
+        .contact-btn {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 16px;
             padding: 1.5rem;
             text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            color: white;
+            text-decoration: none;
+            display: block;
+            position: relative;
+        }
+
+        .contact-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
         }
 
         .contact-icon {
@@ -120,39 +153,73 @@
 
         .contact-name {
             font-weight: 600;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             font-size: 1.1rem;
-            color: white;
         }
 
-        .admin-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
+        .contact-desc {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
         }
 
-        .admin-btn {
-            background: rgba(255, 255, 255, 0.15);
+        /* Floating Admin Menu */
+        .admin-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
+            border-radius: 16px;
+            padding: 1rem;
+            min-width: 200px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            display: none;
+            animation: floatUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .admin-menu.active {
+            display: block;
+        }
+
+        .admin-option {
             padding: 0.8rem 1rem;
             border-radius: 12px;
+            color: #333;
             text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: block;
+            transition: all 0.3s ease;
             font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
         }
 
-        .admin-btn:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        .admin-option:hover {
+            background: rgba(100, 100, 255, 0.1);
+            transform: translateX(5px);
         }
 
-        .admin-btn i {
-            font-size: 1.1rem;
+        .admin-option i {
+            margin-right: 0.5rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Close button for admin menu */
+        .close-admin {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.2rem;
+        }
+
+        .close-admin:hover {
+            color: #333;
         }
 
         /* Product Section - Category Buttons */
@@ -203,6 +270,297 @@
             display: grid;
             gap: 1rem;
             max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .script-item {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 1.2rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            color: white;
+            display: block;
+        }
+
+        .script-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(10px);
+        }
+
+        .script-name {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .script-desc {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.85rem;
+        }
+
+        /* Back Button */
+        .back-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Animations */
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes floatUp {
+            from { opacity: 0; transform: translateX(-50%) translateY(0); }
+            to { opacity: 1; transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* Background effects */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+            animation: floatingBg 20s ease-in-out infinite;
+        }
+
+        @keyframes floatingBg {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(1deg); }
+            66% { transform: translateY(20px) rotate(-1deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-container">
+        <!-- Store Title -->
+        <div class="store-title">
+            <h1>Aether Hub</h1>
+        </div>
+
+        <!-- Horizontal Navigation Tabs -->
+        <div class="nav-tabs">
+            <div class="tab active" onclick="showSection('contact')">Kontak Admin</div>
+            <div class="tab" onclick="showSection('product')">Produk</div>
+            <div class="tab" onclick="showSection('script')">Link Script</div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="content-section active" id="contact">
+            <h2 class="section-title">Kontak Admin</h2>
+            <div class="contact-grid">
+                <!-- Telegram Button with Floating Menu -->
+                <div class="contact-btn" onclick="toggleAdminMenu('telegram')">
+                    <span class="contact-icon">📱</span>
+                    <div class="contact-name">Telegram</div>
+                    <div class="contact-desc">Click untuk pilih admin</div>
+                    
+                    <div class="admin-menu" id="telegramMenu">
+                        <button class="close-admin" onclick="closeAdminMenu('telegram')">×</button>
+                        <a href="https://t.me/Snitchezs" target="_blank" class="admin-option">
+                            <i>👑</i> Snitchezs (Main)
+                        </a>
+                        <a href="https://t.me/Vrtect" target="_blank" class="admin-option">
+                            <i>⚡</i> Vrtect (Tech)
+                        </a>
+                    </div>
+                </div>
+
+                <!-- WhatsApp Button with Floating Menu -->
+                <div class="contact-btn" onclick="toggleAdminMenu('whatsapp')">
+                    <span class="contact-icon">💬</span>
+                    <div class="contact-name">WhatsApp</div>
+                    <div class="contact-desc">Click untuk pilih admin</div>
+                    
+                    <div class="admin-menu" id="whatsappMenu">
+                        <button class="close-admin" onclick="closeAdminMenu('whatsapp')">×</button>
+                        <a href="https://wa.me/6282124169150" target="_blank" class="admin-option">
+                            <i>👑</i> +62 821-2416-9150
+                        </a>
+                        <a href="https://wa.me/62895340154271" target="_blank" class="admin-option">
+                            <i>⚡</i> +62 895-3401-54271
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Bot Store Button with Floating Menu -->
+                <div class="contact-btn" onclick="toggleAdminMenu('botstore')">
+                    <span class="contact-icon">🤖</span>
+                    <div class="contact-name">Bot Store</div>
+                    <div class="contact-desc">Click untuk pilih bot</div>
+                    
+                    <div class="admin-menu" id="botstoreMenu">
+                        <button class="close-admin" onclick="closeAdminMenu('botstore')">×</button>
+                        <a href="#" class="admin-option">
+                            <i>🛒</i> Shop Bot
+                        </a>
+                        <a href="#" class="admin-option">
+                            <i>🔧</i> Support Bot
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Section -->
+        <div class="content-section" id="product">
+            <h2 class="section-title">Kategori Produk</h2>
+            <div class="product-buttons">
+                <a href="panel.html" class="product-btn">
+                    <span class="btn-icon">🖥️</span>
+                    <div class="btn-title">Produk Panel</div>
+                    <div class="btn-desc">Panel unlimited, hosting, dan server management</div>
+                </a>
+
+                <a href="script.html" class="product-btn">
+                    <span class="btn-icon">📜</span>
+                    <div class="btn-title">Produk Script</div>
+                    <div class="btn-desc">Script bot, automation, function bug, dan tools</div>
+                </a>
+
+                <a href="nokos.html" class="product-btn">
+                    <span class="btn-icon">📱</span>
+                    <div class="btn-title">Produk Nomor Kosong</div>
+                    <div class="btn-desc">Akun Telegram Noktel dan layanan verifikasi</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Script Section -->
+        <div class="content-section" id="script">
+            <h2 class="section-title">Link Script</h2>
+            <div class="script-list">
+                <a href="#" class="script-item">
+                    <div class="script-name">WhatsApp Bot Multi Device</div>
+                    <div class="script-desc">Script bot WhatsApp dengan support multi device dan fitur lengkap</div>
+                </a>
+                <a href="#" class="script-item">
+                    <div class="script-name">Telegram UserBot</div>
+                    <div class="script-desc">Automation tools untuk Telegram dengan API capabilities</div>
+                </a>
+                <a href="#" class="script-item">
+                    <div class="script-name">Web Dashboard Admin</div>
+                    <div class="script-desc">Dashboard untuk monitoring dan management system</div>
+                </a>
+                <a href="#" class="script-item">
+                    <div class="script-name">API Integration Kit</div>
+                    <div class="script-desc">Kumpulan API untuk berbagai platform dan services</div>
+                </a>
+                <a href="#" class="script-item">
+                    <div class="script-name">Function Bug Collection</div>
+                    <div class="script-desc">Koleksi function crash, bug, dan exploit tools</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Back Button -->
+        <div style="text-align: center; padding: 2rem;">
+            <a href="index.html" class="back-btn">
+                ← Back to Home
+            </a>
+        </div>
+    </div>
+
+    <script>
+        let activeMenu = null;
+
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+            
+            // Close any open admin menu
+            closeAllAdminMenus();
+        }
+
+        function toggleAdminMenu(menuType) {
+            const menu = document.getElementById(menuType + 'Menu');
+            
+            // Close all other menus first
+            closeAllAdminMenus();
+            
+            if (activeMenu !== menu) {
+                menu.classList.add('active');
+                activeMenu = menu;
+            } else {
+                menu.classList.remove('active');
+                activeMenu = null;
+            }
+            
+            // Prevent event bubbling
+            event.stopPropagation();
+        }
+
+        function closeAdminMenu(menuType) {
+            const menu = document.getElementById(menuType + 'Menu');
+            menu.classList.remove('active');
+            activeMenu = null;
+            event.stopPropagation();
+        }
+
+        function closeAllAdminMenus() {
+            document.querySelectorAll('.admin-menu').forEach(menu => {
+                menu.classList.remove('active');
+            });
+            activeMenu = null;
+        }
+
+        // Close admin menus when clicking outside
+        document.addEventListener('click', function() {
+            closeAllAdminMenus();
+        });
+
+        // Prevent admin menus from closing when clicking inside them
+        document.querySelectorAll('.admin-menu').forEach(menu => {
+            menu.addEventListener('click', function(event) {
+                event.stopPropagation();
+            });
+        });
+    </script>
+</body>
+</html>            max-width: 500px;
             margin: 0 auto;
         }
 
