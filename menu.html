@@ -1,432 +1,11 @@
+ssList.remove('
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aether Hub - Menu</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 1rem;
-        }
-
-        .menu-container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 24px;
-            max-width: 900px;
-            margin: 0 auto;
-            overflow: hidden;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
-            animation: slideUpFade 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-        }
-
-        /* Store Title */
-        .store-title {
-            text-align: center;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .store-title h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            animation: textGlow 4s ease-in-out infinite;
-        }
-
-        @keyframes textGlow {
-            0%, 100% { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
-            50% { text-shadow: 2px 2px 20px rgba(255, 255, 255, 0.3); }
-        }
-
-        /* Horizontal Navigation Tabs */
-        .nav-tabs {
-            display: flex;
-            background: rgba(255, 255, 255, 0.1);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .tab {
-            flex: 1;
-            padding: 1.2rem 1rem;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border-bottom: 3px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .tab:hover {
-            color: white;
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .tab.active {
-            color: white;
-            border-bottom-color: rgba(255, 255, 255, 0.8);
-        }
-
-        .tab::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .tab:hover::before {
-            left: 100%;
-        }
-
-        /* Content Sections */
-        .content-section {
-            display: none;
-            padding: 2.5rem;
-            animation: fadeIn 0.5s ease-out;
-            position: relative;
-            z-index: 1;
-        }
-
-        .content-section.active {
-            display: block;
-        }
-
-        .section-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 2rem;
-            text-align: center;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Contact Section - Main Buttons */
-        .contact-grid {
-            display: grid;
-            gap: 1.5rem;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .contact-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 16px;
-            padding: 1.8rem;
-            text-align: center;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            color: white;
-            text-decoration: none;
-            display: block;
-            position: relative;
-            z-index: 10;
-        }
-
-        .contact-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .contact-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .contact-name {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            font-size: 1.3rem;
-        }
-
-        .contact-desc {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1rem;
-        }
-
-        /* Floating Admin Menu - FIXED VERSION */
-        .admin-menu {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.9);
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 20px;
-            padding: 2rem;
-            min-width: 320px;
-            max-width: 90vw;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
-            z-index: 1000;
-            display: none;
-            animation: modalAppear 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-
-        .admin-menu.active {
-            display: block;
-        }
-
-        .admin-menu::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: -1;
-        }
-
-        .admin-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .admin-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #333;
-        }
-
-        .close-admin {
-            background: none;
-            border: none;
-            color: #666;
-            cursor: pointer;
-            font-size: 1.5rem;
-            padding: 0.3rem;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-            width: 35px;
-            height: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .close-admin:hover {
-            background: rgba(0, 0, 0, 0.1);
-            color: #333;
-        }
-
-        .admin-options {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-
-        .admin-option {
-            background: rgba(100, 100, 255, 0.1);
-            border: 1px solid rgba(100, 100, 255, 0.2);
-            border-radius: 12px;
-            padding: 1.2rem 1rem;
-            color: #333;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-weight: 500;
-        }
-
-        .admin-option:hover {
-            background: rgba(100, 100, 255, 0.2);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .admin-option i {
-            font-size: 1.3rem;
-            width: 25px;
-            text-align: center;
-        }
-
-        /* Overlay untuk background blur */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            z-index: 999;
-            display: none;
-        }
-
-        .overlay.active {
-            display: block;
-        }
-
-        /* Product Section - Category Buttons */
-        .product-buttons {
-            display: grid;
-            gap: 1.5rem;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .product-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 16px;
-            padding: 1.5rem;
-            color: white;
-            text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .product-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .btn-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .btn-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .btn-desc {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        /* Script Section - Link List */
-        .script-list {
-            display: grid;
-            gap: 1rem;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .script-item {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            padding: 1.2rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            text-decoration: none;
-            color: white;
-            display: block;
-        }
-
-        .script-item:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateX(10px);
-        }
-
-        .script-name {
-            font-weight: 600;
-            margin-bottom: 0.3rem;
-        }
-
-        .script-desc {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.85rem;
-        }
-
-        /* Back Button */
-        .back-btn {
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 2rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .back-btn:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Animations */
-        @keyframes slideUpFade {
-            from { opacity: 0; transform: translateY(30px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes modalAppear {
-            from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-        }
-
-        /* Background effects */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: -1;
-            animation: floatingBg 20s ease-in-out infinite;
-        }
-
-        @keyframes floatingBg {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            33% { transform: translateY(-20px) rotate(1deg); }
-            66% { transform: translateY(20px) rotate(-1deg); }
-        }
-    </style>
+    <link rel="stylesheet" href="menu.css">
 </head>
 <body>
     <!-- Overlay untuk background blur -->
@@ -440,31 +19,28 @@
 
         <!-- Horizontal Navigation Tabs -->
         <div class="nav-tabs">
-            <div class="tab active" onclick="showSection('contact', this)">Kontak Admin</div>
-            <div class="tab" onclick="showSection('product', this)">Produk</div>
-            <div class="tab" onclick="showSection('script', this)">Link Script</div>
+            <div class="tab active" data-section="contact">Kontak Admin</div>
+            <div class="tab" data-section="product">Produk</div>
+            <div class="tab" data-section="script">Link Script</div>
         </div>
 
         <!-- Contact Section -->
         <div class="content-section active" id="contact">
             <h2 class="section-title">Kontak Admin</h2>
             <div class="contact-grid">
-                <!-- Telegram Button with Floating Menu -->
-                <div class="contact-btn" onclick="openAdminMenu('telegram')">
+                <div class="contact-btn" data-menu="telegram">
                     <span class="contact-icon">📱</span>
                     <div class="contact-name">Telegram</div>
                     <div class="contact-desc">Click untuk pilih admin</div>
                 </div>
 
-                <!-- WhatsApp Button with Floating Menu -->
-                <div class="contact-btn" onclick="openAdminMenu('whatsapp')">
+                <div class="contact-btn" data-menu="whatsapp">
                     <span class="contact-icon">💬</span>
                     <div class="contact-name">WhatsApp</div>
                     <div class="contact-desc">Click untuk pilih admin</div>
                 </div>
 
-                <!-- Bot Store Button with Floating Menu -->
-                <div class="contact-btn" onclick="openAdminMenu('botstore')">
+                <div class="contact-btn" data-menu="botstore">
                     <span class="contact-icon">🤖</span>
                     <div class="contact-name">Bot Store</div>
                     <div class="contact-desc">Click untuk pilih bot</div>
@@ -502,23 +78,15 @@
             <div class="script-list">
                 <a href="#" class="script-item">
                     <div class="script-name">WhatsApp Bot Multi Device</div>
-                    <div class="script-desc">Script bot WhatsApp dengan support multi device dan fitur lengkap</div>
+                    <div class="script-desc">Script bot WhatsApp dengan support multi device</div>
                 </a>
                 <a href="#" class="script-item">
                     <div class="script-name">Telegram UserBot</div>
-                    <div class="script-desc">Automation tools untuk Telegram dengan API capabilities</div>
+                    <div class="script-desc">Automation tools untuk Telegram dengan API</div>
                 </a>
                 <a href="#" class="script-item">
                     <div class="script-name">Web Dashboard Admin</div>
-                    <div class="script-desc">Dashboard untuk monitoring dan management system</div>
-                </a>
-                <a href="#" class="script-item">
-                    <div class="script-name">API Integration Kit</div>
-                    <div class="script-desc">Kumpulan API untuk berbagai platform dan services</div>
-                </a>
-                <a href="#" class="script-item">
-                    <div class="script-name">Function Bug Collection</div>
-                    <div class="script-desc">Koleksi function crash, bug, dan exploit tools</div>
+                    <div class="script-desc">Dashboard untuk monitoring dan management</div>
                 </a>
             </div>
         </div>
@@ -535,7 +103,7 @@
     <div class="admin-menu" id="telegramMenu">
         <div class="admin-header">
             <div class="admin-title">Pilih Admin Telegram</div>
-            <button class="close-admin" onclick="closeAdminMenu('telegram')">×</button>
+            <button class="close-admin" data-close="telegram">×</button>
         </div>
         <div class="admin-options">
             <a href="https://t.me/Snitchezs" target="_blank" class="admin-option">
@@ -550,7 +118,7 @@
     <div class="admin-menu" id="whatsappMenu">
         <div class="admin-header">
             <div class="admin-title">Pilih Admin WhatsApp</div>
-            <button class="close-admin" onclick="closeAdminMenu('whatsapp')">×</button>
+            <button class="close-admin" data-close="whatsapp">×</button>
         </div>
         <div class="admin-options">
             <a href="https://wa.me/6282124169150" target="_blank" class="admin-option">
@@ -565,7 +133,7 @@
     <div class="admin-menu" id="botstoreMenu">
         <div class="admin-header">
             <div class="admin-title">Pilih Bot Store</div>
-            <button class="close-admin" onclick="closeAdminMenu('botstore')">×</button>
+            <button class="close-admin" data-close="botstore">×</button>
         </div>
         <div class="admin-options">
             <a href="#" class="admin-option">
@@ -577,45 +145,6 @@
         </div>
     </div>
 
-    <script>
-        let activeMenu = null;
-
-        function showSection(sectionId, element) {
-            // Hide all sections
-            document.querySelectorAll('.content-section').forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            // Remove active class from all tabs
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Show selected section
-            document.getElementById(sectionId).classList.add('active');
-            
-            // Add active class to clicked tab
-            element.classList.add('active');
-            
-            // Close any open admin menu
-            closeAllAdminMenus();
-        }
-
-        function openAdminMenu(menuType) {
-            const menu = document.getElementById(menuType + 'Menu');
-            const overlay = document.getElementById('overlay');
-            
-            // Close all other menus first
-            closeAllAdminMenus();
-            
-            // Show overlay and menu
-            overlay.classList.add('active');
-            menu.classList.add('active');
-            activeMenu = menu;
-        }
-
-        function closeAdminMenu(menuType) {
-            const menu = document.getElementById(menuType + 'Menu');
-            const overlay = document.getElementById('overlay');
-            
-            menu.classList.remove('
+    <script src="menu.js"></script>
+</body>
+</html>
