@@ -15,6 +15,9 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             padding: 1rem;
         }
 
@@ -23,45 +26,48 @@
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 24px;
-            max-width: 800px;
-            margin: 0 auto;
-            overflow: hidden;
+            padding: 3rem;
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
             animation: slideUpFade 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Navigation Tabs */
-        .nav-tabs {
-            display: flex;
-            background: rgba(255, 255, 255, 0.1);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 0 1rem;
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
-        .tab {
-            flex: 1;
-            padding: 1.2rem 1rem;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 600;
+        .product-buttons {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .product-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            color: white;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border-bottom: 3px solid transparent;
             position: relative;
             overflow: hidden;
         }
 
-        .tab:hover {
-            color: white;
-            background: rgba(255, 255, 255, 0.1);
+        .product-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
-        .tab.active {
-            color: white;
-            border-bottom-color: rgba(255, 255, 255, 0.8);
-        }
-
-        .tab::before {
+        .product-btn::before {
             content: '';
             position: absolute;
             top: 0;
@@ -72,158 +78,52 @@
             transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .tab:hover::before {
+        .product-btn:hover::before {
             left: 100%;
         }
 
-        /* Content Sections */
-        .content-section {
-            display: none;
-            padding: 2.5rem;
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        .content-section.active {
-            display: block;
-        }
-
-        .section-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 2rem;
-            text-align: center;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Contact Items */
-        .contact-grid {
-            display: grid;
-            gap: 1.5rem;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        .contact-item {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 16px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            text-decoration: none;
-            color: white;
-            display: block;
-        }
-
-        .contact-item:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .contact-icon {
-            font-size: 2rem;
+        .btn-icon {
+            font-size: 3rem;
             margin-bottom: 1rem;
             display: block;
         }
 
-        .contact-name {
+        .btn-title {
+            font-size: 1.4rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
-            font-size: 1.1rem;
         }
 
-        .contact-desc {
+        .btn-desc {
             color: rgba(255, 255, 255, 0.8);
-            font-size: 0.9rem;
-        }
-
-        /* Product Grid */
-        .product-grid {
-            display: grid;
-            gap: 1.5rem;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        }
-
-        .product-card {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 16px;
-            padding: 1.5rem;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .product-card:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .product-name {
-            font-weight: 600;
-            color: white;
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .product-price {
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 500;
-            margin-bottom: 1rem;
-        }
-
-        .product-desc {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             line-height: 1.5;
         }
 
-        /* Script Links */
-        .script-list {
-            display: grid;
-            gap: 1rem;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .script-item {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            padding: 1.2rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            text-decoration: none;
+        .back-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             color: white;
-            display: block;
-        }
-
-        .script-item:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateX(10px);
-        }
-
-        .script-name {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
             font-weight: 600;
-            margin-bottom: 0.3rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .script-desc {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.85rem;
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
 
         /* Animations */
         @keyframes slideUpFade {
             from { opacity: 0; transform: translateY(30px) scale(0.95); }
             to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
 
         /* Background effects */
@@ -251,115 +151,94 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .nav-tabs {
-                flex-direction: column;
+            .menu-container {
+                padding: 2rem;
             }
             
-            .content-section {
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 2rem;
+            }
+            
+            .product-btn {
                 padding: 1.5rem;
             }
             
-            .product-grid {
-                grid-template-columns: 1fr;
+            .btn-icon {
+                font-size: 2.5rem;
+            }
+            
+            .btn-title {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .menu-container {
+                padding: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .product-buttons {
+                gap: 1rem;
+            }
+            
+            .product-btn {
+                padding: 1.2rem;
             }
         }
     </style>
 </head>
 <body>
     <div class="menu-container">
-        <!-- Navigation Tabs -->
-        <div class="nav-tabs">
-            <div class="tab active" onclick="showSection('contact')">Kontak</div>
-            <div class="tab" onclick="showSection('product')">Produk</div>
-            <div class="tab" onclick="showSection('script')">Script</div>
+        <h1 class="section-title">Produk Categories</h1>
+        
+        <div class="product-buttons">
+            <!-- Panel Products Button -->
+            <a href="panel.html" class="product-btn">
+                <span class="btn-icon">🖥️</span>
+                <div class="btn-title">Produk Panel</div>
+                <div class="btn-desc">
+                    Panel unlimited, hosting, dan server management untuk berbagai kebutuhan deploy
+                </div>
+            </a>
+
+            <!-- Script Products Button -->
+            <a href="script.html" class="product-btn">
+                <span class="btn-icon">📜</span>
+                <div class="btn-title">Produk Script</div>
+                <div class="btn-desc">
+                    Koleksi script bot, automation, function bug, dan tools development lainnya
+                </div>
+            </a>
+
+            <!-- Nomor Kosong Products Button -->
+            <a href="nokos.html" class="product-btn">
+                <span class="btn-icon">📱</span>
+                <div class="btn-title">Produk Nomor Kosong</div>
+                <div class="btn-desc">
+                    Akun Telegram Noktel, nomor virtual, dan layanan verifikasi untuk berbagai platform
+                </div>
+            </a>
         </div>
 
-        <!-- Contact Section -->
-        <div class="content-section active" id="contact">
-            <h2 class="section-title">Kontak Admin</h2>
-            <div class="contact-grid">
-                <a href="https://t.me/Snitchezs" target="_blank" class="contact-item">
-                    <span class="contact-icon">📱</span>
-                    <div class="contact-name">Telegram</div>
-                    <div class="contact-desc">Hubungi via Telegram</div>
-                </a>
-                <a href="https://wa.me/6282124169150" target="_blank" class="contact-item">
-                    <span class="contact-icon">💬</span>
-                    <div class="contact-name">WhatsApp</div>
-                    <div class="contact-desc">Chat langsung via WhatsApp</div>
-                </a>
-                <a href="#" class="contact-item">
-                    <span class="contact-icon">🤖</span>
-                    <div class="contact-name">Bot Store</div>
-                    <div class="contact-desc">Akses bot store kami</div>
-                </a>
-            </div>
-        </div>
-
-        <!-- Product Section -->
-        <div class="content-section" id="product">
-            <h2 class="section-title">Produk Admin</h2>
-            <div class="product-grid">
-                <div class="product-card">
-                    <div class="product-name">Nomer Kosong</div>
-                    <div class="product-price">Starting From 15.000/ IDR</div>
-                    <div class="product-desc">Akun Telegram Noktel ID 1-6 siap pakai untuk verifikasi dan multi akun.</div>
-                </div>
-                <div class="product-card">
-                    <div class="product-name">Panel Unli</div>
-                    <div class="product-price">Starting from 5.000/ IDR</div>
-                    <div class="product-desc">Panel unlimited berbasis Pterodactyl untuk deploy bot dan script.</div>
-                </div>
-                <div class="product-card">
-                    <div class="product-name">Function Bug</div>
-                    <div class="product-price">Starting from 50.000/ IDR</div>
-                    <div class="product-desc">Koleksi function crash, bug, bypass, dan exploit untuk Telegram.</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Script Section -->
-        <div class="content-section" id="script">
-            <h2 class="section-title">Link Script</h2>
-            <div class="script-list">
-                <a href="#" class="script-item">
-                    <div class="script-name">WhatsApp Bot Script</div>
-                    <div class="script-desc">Script bot WhatsApp dengan fitur lengkap</div>
-                </a>
-                <a href="#" class="script-item">
-                    <div class="script-name">Telegram Automation</div>
-                    <div class="script-desc">Tools otomatisasi untuk Telegram</div>
-                </a>
-                <a href="#" class="script-item">
-                    <div class="script-name">Web Dashboard</div>
-                    <div class="script-desc">Dashboard admin untuk monitoring</div>
-                </a>
-                <a href="#" class="script-item">
-                    <div class="script-name">API Integration</div>
-                    <div class="script-desc">Kumpulan API untuk berbagai platform</div>
-                </a>
-            </div>
-        </div>
+        <a href="index.html" class="back-btn">
+            ← Back to Home
+        </a>
     </div>
 
     <script>
-        function showSection(sectionId) {
-            // Hide all sections
-            document.querySelectorAll('.content-section').forEach(section => {
-                section.classList.remove('active');
+        // Add loading animation to buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.product-btn');
+            buttons.forEach((button, index) => {
+                button.style.animationDelay = `${index * 0.1}s`;
+                button.style.animation = 'slideUpFade 0.6s ease-out both';
             });
-            
-            // Remove active class from all tabs
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Show selected section
-            document.getElementById(sectionId).classList.add('active');
-            
-            // Add active class to clicked tab
-            event.target.classList.add('active');
-        }
+        });
     </script>
 </body>
-  </html>
+</html>
