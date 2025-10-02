@@ -1,11 +1,91 @@
-ssList.remove('
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aether Hub - Menu</title>
-    <link rel="stylesheet" href="menu.css">
+    <style>
+        /* ALL CSS CODE FROM BEFORE GOES HERE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 1rem;
+        }
+
+        .menu-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            max-width: 900px;
+            margin: 0 auto;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            animation: slideUpFade 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        /* Store Title */
+        .store-title {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .store-title h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: textGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes textGlow {
+            0%, 100% { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
+            50% { text-shadow: 2px 2px 20px rgba(255, 255, 255, 0.3); }
+        }
+
+        /* Horizontal Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            background: rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tab {
+            flex: 1;
+            padding: 1.2rem 1rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tab:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .tab.active {
+            color: white;
+            border-bottom-color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* ... (REST OF THE CSS FROM BEFORE) ... */
+
+    </style>
 </head>
 <body>
     <!-- Overlay untuk background blur -->
@@ -145,6 +225,83 @@ ssList.remove('
         </div>
     </div>
 
-    <script src="menu.js"></script>
+    <script>
+        // Simple JavaScript dengan event delegation
+        document.addEventListener('click', function(event) {
+            const target = event.target;
+            
+            // Handle tab clicks
+            if (target.classList.contains('tab')) {
+                const sectionId = target.getAttribute('data-section');
+                showSection(sectionId, target);
+            }
+            
+            // Handle contact button clicks
+            if (target.classList.contains('contact-btn') || target.closest('.contact-btn')) {
+                const contactBtn = target.classList.contains('contact-btn') ? target : target.closest('.contact-btn');
+                const menuType = contactBtn.getAttribute('data-menu');
+                openAdminMenu(menuType);
+            }
+            
+            // Handle close button clicks
+            if (target.classList.contains('close-admin')) {
+                const menuType = target.getAttribute('data-close');
+                closeAdminMenu(menuType);
+            }
+            
+            // Handle overlay clicks
+            if (target.id === 'overlay') {
+                closeAllAdminMenus();
+            }
+        });
+
+        function showSection(sectionId, element) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active class to clicked tab
+            element.classList.add('active');
+            
+            // Close any open admin menu
+            closeAllAdminMenus();
+        }
+
+        function openAdminMenu(menuType) {
+            const menu = document.getElementById(menuType + 'Menu');
+            const overlay = document.getElementById('overlay');
+            
+            // Close all other menus first
+            closeAllAdminMenus();
+            
+            // Show overlay and menu
+            overlay.classList.add('active');
+            menu.classList.add('active');
+        }
+
+        function closeAdminMenu(menuType) {
+            const menu = document.getElementById(menuType + 'Menu');
+            const overlay = document.getElementById('overlay');
+            
+            menu.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+
+        function closeAllAdminMenus() {
+            document.querySelectorAll('.admin-menu').forEach(menu => {
+                menu.classList.remove('active');
+            });
+            document.getElementById('overlay').classList.remove('active');
+        }
+    </script>
 </body>
 </html>
