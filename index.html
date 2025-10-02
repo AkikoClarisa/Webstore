@@ -19,6 +19,7 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            padding: 1rem;
         }
 
         .intro-container {
@@ -29,7 +30,7 @@
             padding: 3rem;
             text-align: center;
             max-width: 480px;
-            width: 90%;
+            width: 100%;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
             animation: slideUpFade 1.2s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
@@ -169,7 +170,7 @@
 </head>
 <body>
     <div class="intro-container">
-        <img src="Profile.jpg" alt="Aether Hub" class="profile-img">
+        <img src="https://files.catbox.moe/2x8j0p.jpg" alt="Aether Hub" class="profile-img">
         <h1>Aether Hub</h1>
         <div class="typing-text" id="typingText"></div>
         <button class="start-btn" onclick="goToMain()">
@@ -179,7 +180,7 @@
 
     <script>
         const texts = [
-            "Hello, Welcome To Aether Hub.",
+            "Hello, I'm Aether Hub Bot.",
             "Web Developer. Code Dreamer.", 
             "From idea to launch.",
             "Click - Type - Create.",
@@ -209,8 +210,7 @@
         }
 
         function goToMain() {
-            // Akan diisi dengan navigasi ke main content
-            console.log('Navigating to main content...');
+            window.location.href = 'menu.html';
         }
 
         // Start typing animation when page loads
