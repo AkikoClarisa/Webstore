@@ -1,3 +1,5 @@
+</body>
+</html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,6 +59,13 @@
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
             animation: float 6s ease-in-out infinite;
             transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            margin: 0 auto 2rem auto;
         }
 
         .profile-img:hover {
@@ -170,7 +179,10 @@
 </head>
 <body>
     <div class="intro-container">
-        <img src="https://files.catbox.moe/rdnk27.jpg" alt="Aether Hub" class="profile-img">
+        <!-- Profile Image dengan fallback -->
+        <div class="profile-img" id="profileImage">
+            🛍️
+        </div>
         <h1>Aether Hub</h1>
         <div class="typing-text" id="typingText"></div>
         <button class="start-btn" onclick="goToMain()">
@@ -180,7 +192,7 @@
 
     <script>
         const texts = [
-            "Hello, I'm Aether Hub Bot.",
+            "Hello, I'm Snithexercist.",
             "Web Developer. Code Dreamer.", 
             "From idea to launch.",
             "Click - Type - Create.",
@@ -213,8 +225,32 @@
             window.location.href = 'menu.html';
         }
 
-        // Start typing animation when page loads
-        window.onload = typeText;
+        // Coba load external image, jika gagal pakai fallback
+        function loadProfileImage() {
+            const profileImg = document.getElementById('profileImage');
+            const testImage = new Image();
+            
+            testImage.onload = function() {
+                // Jika image berhasil load, ganti dengan image
+                profileImg.innerHTML = '';
+                profileImg.style.backgroundImage = 'url("https://img1.pixhost.to/images/8904/643506796_image.jpg")';
+                profileImg.style.backgroundSize = 'cover';
+                profileImg.style.backgroundPosition = 'center';
+            };
+            
+            testImage.onerror = function() {
+                // Jika image gagal load, tetap pakai emoji
+                console.log('Using fallback profile image');
+            };
+            
+            testImage.src = 'https://img1.pixhost.to/images/8904/643506796_image.jpg';
+        }
+
+        // Start when page loads
+        window.onload = function() {
+            typeText();
+            loadProfileImage();
+        };
     </script>
 </body>
 </html>
