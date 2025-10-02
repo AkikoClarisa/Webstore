@@ -1,307 +1,136 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aether Hub - Menu</title>
     <style>
-        /* ALL CSS CODE FROM BEFORE GOES HERE */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 1rem;
+            padding: 20px;
         }
-
-        .menu-container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 24px;
-            max-width: 900px;
+        .container {
+            max-width: 800px;
             margin: 0 auto;
-            overflow: hidden;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
-            animation: slideUpFade 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
-
-        /* Store Title */
-        .store-title {
+        h1 { 
+            text-align: center; 
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .nav { 
+            display: flex; 
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eee;
+        }
+        .nav-btn { 
+            flex: 1; 
+            padding: 15px;
             text-align: center;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .store-title h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            animation: textGlow 4s ease-in-out infinite;
-        }
-
-        @keyframes textGlow {
-            0%, 100% { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
-            50% { text-shadow: 2px 2px 20px rgba(255, 255, 255, 0.3); }
-        }
-
-        /* Horizontal Navigation Tabs */
-        .nav-tabs {
-            display: flex;
-            background: rgba(255, 255, 255, 0.1);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .tab {
-            flex: 1;
-            padding: 1.2rem 1rem;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 600;
+            background: none;
+            border: none;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border-bottom: 3px solid transparent;
-            position: relative;
-            overflow: hidden;
+            font-size: 16px;
+            font-weight: bold;
+            color: #666;
         }
-
-        .tab:hover {
+        .nav-btn.active {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+        }
+        .section { display: none; }
+        .section.active { display: block; }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            background: #667eea;
             color: white;
-            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
         }
-
-        .tab.active {
-            color: white;
-            border-bottom-color: rgba(255, 255, 255, 0.8);
+        .btn:hover { background: #5a6fd8; }
+        .back-btn {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
         }
-
-        /* ... (REST OF THE CSS FROM BEFORE) ... */
-
     </style>
 </head>
 <body>
-    <!-- Overlay untuk background blur -->
-    <div class="overlay" id="overlay"></div>
-
-    <div class="menu-container">
-        <!-- Store Title -->
-        <div class="store-title">
-            <h1>Aether Hub</h1>
+    <div class="container">
+        <h1>🛍️ Aether Hub</h1>
+        
+        <div class="nav">
+            <button class="nav-btn active" onclick="showSection('contact')">Kontak Admin</button>
+            <button class="nav-btn" onclick="showSection('product')">Produk</button>
+            <button class="nav-btn" onclick="showSection('script')">Link Script</button>
         </div>
 
-        <!-- Horizontal Navigation Tabs -->
-        <div class="nav-tabs">
-            <div class="tab active" data-section="contact">Kontak Admin</div>
-            <div class="tab" data-section="product">Produk</div>
-            <div class="tab" data-section="script">Link Script</div>
+        <!-- Kontak Section -->
+        <div class="section active" id="contact">
+            <a href="https://t.me/Snitchezs" target="_blank" class="btn">📱 Telegram - Snitchezs</a>
+            <a href="https://t.me/Vrtect" target="_blank" class="btn">📱 Telegram - Vrtect</a>
+            <a href="https://wa.me/6282124169150" target="_blank" class="btn">💬 WhatsApp - +62 821-2416-9150</a>
+            <a href="https://wa.me/62895340154271" target="_blank" class="btn">💬 WhatsApp - +62 895-3401-54271</a>
+            <a href="#" class="btn">🤖 Bot Store - Shop Bot</a>
+            <a href="#" class="btn">🤖 Bot Store - Support Bot</a>
         </div>
 
-        <!-- Contact Section -->
-        <div class="content-section active" id="contact">
-            <h2 class="section-title">Kontak Admin</h2>
-            <div class="contact-grid">
-                <div class="contact-btn" data-menu="telegram">
-                    <span class="contact-icon">📱</span>
-                    <div class="contact-name">Telegram</div>
-                    <div class="contact-desc">Click untuk pilih admin</div>
-                </div>
-
-                <div class="contact-btn" data-menu="whatsapp">
-                    <span class="contact-icon">💬</span>
-                    <div class="contact-name">WhatsApp</div>
-                    <div class="contact-desc">Click untuk pilih admin</div>
-                </div>
-
-                <div class="contact-btn" data-menu="botstore">
-                    <span class="contact-icon">🤖</span>
-                    <div class="contact-name">Bot Store</div>
-                    <div class="contact-desc">Click untuk pilih bot</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Product Section -->
-        <div class="content-section" id="product">
-            <h2 class="section-title">Kategori Produk</h2>
-            <div class="product-buttons">
-                <a href="panel.html" class="product-btn">
-                    <span class="btn-icon">🖥️</span>
-                    <div class="btn-title">Produk Panel</div>
-                    <div class="btn-desc">Panel unlimited, hosting, dan server management</div>
-                </a>
-
-                <a href="script.html" class="product-btn">
-                    <span class="btn-icon">📜</span>
-                    <div class="btn-title">Produk Script</div>
-                    <div class="btn-desc">Script bot, automation, function bug, dan tools</div>
-                </a>
-
-                <a href="nokos.html" class="product-btn">
-                    <span class="btn-icon">📱</span>
-                    <div class="btn-title">Produk Nomor Kosong</div>
-                    <div class="btn-desc">Akun Telegram Noktel dan layanan verifikasi</div>
-                </a>
-            </div>
+        <!-- Produk Section -->
+        <div class="section" id="product">
+            <a href="panel.html" class="btn">🖥️ Produk Panel</a>
+            <a href="script.html" class="btn">📜 Produk Script</a>
+            <a href="nokos.html" class="btn">📱 Produk Nomor Kosong</a>
         </div>
 
         <!-- Script Section -->
-        <div class="content-section" id="script">
-            <h2 class="section-title">Link Script</h2>
-            <div class="script-list">
-                <a href="#" class="script-item">
-                    <div class="script-name">WhatsApp Bot Multi Device</div>
-                    <div class="script-desc">Script bot WhatsApp dengan support multi device</div>
-                </a>
-                <a href="#" class="script-item">
-                    <div class="script-name">Telegram UserBot</div>
-                    <div class="script-desc">Automation tools untuk Telegram dengan API</div>
-                </a>
-                <a href="#" class="script-item">
-                    <div class="script-name">Web Dashboard Admin</div>
-                    <div class="script-desc">Dashboard untuk monitoring dan management</div>
-                </a>
-            </div>
+        <div class="section" id="script">
+            <a href="#" class="btn">WhatsApp Bot Multi Device</a>
+            <a href="#" class="btn">Telegram UserBot</a>
+            <a href="#" class="btn">Web Dashboard Admin</a>
+            <a href="#" class="btn">API Integration Kit</a>
+            <a href="#" class="btn">Function Bug Collection</a>
         </div>
 
-        <!-- Back Button -->
-        <div style="text-align: center; padding: 2rem;">
-            <a href="index.html" class="back-btn">
-                ← Back to Home
-            </a>
-        </div>
-    </div>
-
-    <!-- Floating Admin Menus -->
-    <div class="admin-menu" id="telegramMenu">
-        <div class="admin-header">
-            <div class="admin-title">Pilih Admin Telegram</div>
-            <button class="close-admin" data-close="telegram">×</button>
-        </div>
-        <div class="admin-options">
-            <a href="https://t.me/Snitchezs" target="_blank" class="admin-option">
-                <i>👑</i> Snitchezs (Main Admin)
-            </a>
-            <a href="https://t.me/Vrtect" target="_blank" class="admin-option">
-                <i>⚡</i> Vrtect (Tech Admin)
-            </a>
-        </div>
-    </div>
-
-    <div class="admin-menu" id="whatsappMenu">
-        <div class="admin-header">
-            <div class="admin-title">Pilih Admin WhatsApp</div>
-            <button class="close-admin" data-close="whatsapp">×</button>
-        </div>
-        <div class="admin-options">
-            <a href="https://wa.me/6282124169150" target="_blank" class="admin-option">
-                <i>👑</i> +62 821-2416-9150
-            </a>
-            <a href="https://wa.me/62895340154271" target="_blank" class="admin-option">
-                <i>⚡</i> +62 895-3401-54271
-            </a>
-        </div>
-    </div>
-
-    <div class="admin-menu" id="botstoreMenu">
-        <div class="admin-header">
-            <div class="admin-title">Pilih Bot Store</div>
-            <button class="close-admin" data-close="botstore">×</button>
-        </div>
-        <div class="admin-options">
-            <a href="#" class="admin-option">
-                <i>🛒</i> Shop Bot
-            </a>
-            <a href="#" class="admin-option">
-                <i>🔧</i> Support Bot
-            </a>
-        </div>
+        <a href="index.html" class="back-btn">← Back to Home</a>
     </div>
 
     <script>
-        // Simple JavaScript dengan event delegation
-        document.addEventListener('click', function(event) {
-            const target = event.target;
-            
-            // Handle tab clicks
-            if (target.classList.contains('tab')) {
-                const sectionId = target.getAttribute('data-section');
-                showSection(sectionId, target);
-            }
-            
-            // Handle contact button clicks
-            if (target.classList.contains('contact-btn') || target.closest('.contact-btn')) {
-                const contactBtn = target.classList.contains('contact-btn') ? target : target.closest('.contact-btn');
-                const menuType = contactBtn.getAttribute('data-menu');
-                openAdminMenu(menuType);
-            }
-            
-            // Handle close button clicks
-            if (target.classList.contains('close-admin')) {
-                const menuType = target.getAttribute('data-close');
-                closeAdminMenu(menuType);
-            }
-            
-            // Handle overlay clicks
-            if (target.id === 'overlay') {
-                closeAllAdminMenus();
-            }
-        });
-
-        function showSection(sectionId, element) {
+        function showSection(sectionName) {
             // Hide all sections
-            document.querySelectorAll('.content-section').forEach(section => {
+            document.querySelectorAll('.section').forEach(section => {
                 section.classList.remove('active');
             });
             
-            // Remove active class from all tabs
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
+            // Remove active class from all buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
             });
             
             // Show selected section
-            document.getElementById(sectionId).classList.add('active');
+            document.getElementById(sectionName).classList.add('active');
             
-            // Add active class to clicked tab
-            element.classList.add('active');
-            
-            // Close any open admin menu
-            closeAllAdminMenus();
+            // Add active class to clicked button
+            event.target.classList.add('active');
         }
-
-        function openAdminMenu(menuType) {
-            const menu = document.getElementById(menuType + 'Menu');
-            const overlay = document.getElementById('overlay');
-            
-            // Close all other menus first
-            closeAllAdminMenus();
-            
-            // Show overlay and menu
-            overlay.classList.add('active');
-            menu.classList.add('active');
-        }
-
-        function closeAdminMenu(menuType) {
-            const menu = document.getElementById(menuType + 'Menu');
-            const overlay = document.getElementById('overlay');
-            
-            menu.classList.remove('active');
-            overlay.classList.remove('active');
-        }
-
-        function closeAllAdminMenus() {
-            document.querySelectorAll('.admin-menu').forEach(menu => {
-                menu.classList.remove('active');
-            });
-            document.getElementById('overlay').classList.remove('active');
-        }
+        
+        console.log('Website loaded successfully!');
     </script>
 </body>
 </html>
