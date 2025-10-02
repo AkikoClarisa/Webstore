@@ -15,9 +15,6 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             padding: 1rem;
         }
 
@@ -26,48 +23,44 @@
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 24px;
-            padding: 3rem;
-            text-align: center;
-            max-width: 600px;
-            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            overflow: hidden;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
             animation: slideUpFade 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .section-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 3rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .product-buttons {
-            display: grid;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .product-btn {
+        /* Horizontal Navigation Tabs */
+        .nav-tabs {
+            display: flex;
             background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            padding: 2rem;
-            color: white;
-            text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tab {
+            flex: 1;
+            padding: 1.2rem 1rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 600;
             cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 3px solid transparent;
             position: relative;
             overflow: hidden;
         }
 
-        .product-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        .tab:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
         }
 
-        .product-btn::before {
+        .tab.active {
+            color: white;
+            border-bottom-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .tab::before {
             content: '';
             position: absolute;
             top: 0;
@@ -78,28 +71,168 @@
             transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .product-btn:hover::before {
+        .tab:hover::before {
             left: 100%;
         }
 
+        /* Content Sections */
+        .content-section {
+            display: none;
+            padding: 2.5rem;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 2rem;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Contact Section - Admin Buttons */
+        .contact-grid {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-category {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .contact-name {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            color: white;
+        }
+
+        .admin-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .admin-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .admin-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .admin-btn i {
+            font-size: 1.1rem;
+        }
+
+        /* Product Section - Category Buttons */
+        .product-buttons {
+            display: grid;
+            gap: 1.5rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .product-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+            color: white;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+        }
+
+        .product-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
         .btn-icon {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 1rem;
             display: block;
         }
 
         .btn-title {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
 
         .btn-desc {
             color: rgba(255, 255, 255, 0.8);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             line-height: 1.5;
         }
 
+        /* Script Section - Link List */
+        .script-list {
+            display: grid;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .script-item {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 1.2rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            color: white;
+            display: block;
+        }
+
+        .script-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(10px);
+        }
+
+        .script-name {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .script-desc {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.85rem;
+        }
+
+        /* Back Button */
         .back-btn {
             background: rgba(255, 255, 255, 0.15);
             border: 1px solid rgba(255, 255, 255, 0.3);
@@ -112,6 +245,7 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            margin-top: 2rem;
         }
 
         .back-btn:hover {
@@ -124,6 +258,11 @@
         @keyframes slideUpFade {
             from { opacity: 0; transform: translateY(30px) scale(0.95); }
             to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         /* Background effects */
@@ -148,97 +287,142 @@
             33% { transform: translateY(-20px) rotate(1deg); }
             66% { transform: translateY(20px) rotate(-1deg); }
         }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .menu-container {
-                padding: 2rem;
-            }
-            
-            .section-title {
-                font-size: 1.8rem;
-                margin-bottom: 2rem;
-            }
-            
-            .product-btn {
-                padding: 1.5rem;
-            }
-            
-            .btn-icon {
-                font-size: 2.5rem;
-            }
-            
-            .btn-title {
-                font-size: 1.2rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .menu-container {
-                padding: 1.5rem;
-            }
-            
-            .section-title {
-                font-size: 1.6rem;
-            }
-            
-            .product-buttons {
-                gap: 1rem;
-            }
-            
-            .product-btn {
-                padding: 1.2rem;
-            }
-        }
     </style>
 </head>
 <body>
     <div class="menu-container">
-        <h1 class="section-title">Produk Categories</h1>
-        
-        <div class="product-buttons">
-            <!-- Panel Products Button -->
-            <a href="panel.html" class="product-btn">
-                <span class="btn-icon">🖥️</span>
-                <div class="btn-title">Produk Panel</div>
-                <div class="btn-desc">
-                    Panel unlimited, hosting, dan server management untuk berbagai kebutuhan deploy
-                </div>
-            </a>
-
-            <!-- Script Products Button -->
-            <a href="script.html" class="product-btn">
-                <span class="btn-icon">📜</span>
-                <div class="btn-title">Produk Script</div>
-                <div class="btn-desc">
-                    Koleksi script bot, automation, function bug, dan tools development lainnya
-                </div>
-            </a>
-
-            <!-- Nomor Kosong Products Button -->
-            <a href="nokos.html" class="product-btn">
-                <span class="btn-icon">📱</span>
-                <div class="btn-title">Produk Nomor Kosong</div>
-                <div class="btn-desc">
-                    Akun Telegram Noktel, nomor virtual, dan layanan verifikasi untuk berbagai platform
-                </div>
-            </a>
+        <!-- Horizontal Navigation Tabs -->
+        <div class="nav-tabs">
+            <div class="tab active" onclick="showSection('contact')">Kontak Admin</div>
+            <div class="tab" onclick="showSection('product')">Produk</div>
+            <div class="tab" onclick="showSection('script')">Link Script</div>
         </div>
 
-        <a href="index.html" class="back-btn">
-            ← Back to Home
-        </a>
+        <!-- Contact Section -->
+        <div class="content-section active" id="contact">
+            <h2 class="section-title">Kontak Admin</h2>
+            <div class="contact-grid">
+                <!-- Telegram Admins -->
+                <div class="contact-category">
+                    <span class="contact-icon">📱</span>
+                    <div class="contact-name">Telegram</div>
+                    <div class="admin-buttons">
+                        <a href="https://t.me/Snitchezs" target="_blank" class="admin-btn">
+                            <i>👑</i> Snitchezs (Main Admin)
+                        </a>
+                        <a href="https://t.me/Vrtect" target="_blank" class="admin-btn">
+                            <i>⚡</i> Vrtect (Tech Admin)
+                        </a>
+                    </div>
+                </div>
+
+                <!-- WhatsApp Admins -->
+                <div class="contact-category">
+                    <span class="contact-icon">💬</span>
+                    <div class="contact-name">WhatsApp</div>
+                    <div class="admin-buttons">
+                        <a href="https://wa.me/6282124169150" target="_blank" class="admin-btn">
+                            <i>👑</i> +62 821-2416-9150
+                        </a>
+                        <a href="https://wa.me/62895340154271" target="_blank" class="admin-btn">
+                            <i>⚡</i> +62 895-3401-54271
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Bot Store -->
+                <div class="contact-category">
+                    <span class="contact-icon">🤖</span>
+                    <div class="contact-name">Bot Store</div>
+                    <div class="admin-buttons">
+                        <a href="#" class="admin-btn">
+                            <i>🛒</i> Shop Bot
+                        </a>
+                        <a href="#" class="admin-btn">
+                            <i>🔧</i> Support Bot
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Section -->
+        <div class="content-section" id="product">
+            <h2 class="section-title">Kategori Produk</h2>
+            <div class="product-buttons">
+                <a href="panel.html" class="product-btn">
+                    <span class="btn-icon">🖥️</span>
+                    <div class="btn-title">Produk Panel</div>
+                    <div class="btn-desc">Panel unlimited, hosting, dan server management</div>
+                </a>
+
+                <a href="script.html" class="product-btn">
+                    <span class="btn-icon">📜</span>
+                    <div class="btn-title">Produk Script</div>
+                    <div class="btn-desc">Script bot, automation, function bug, dan tools</div>
+                </a>
+
+                <a href="nokos.html" class="product-btn">
+                    <span class="btn-icon">📱</span>
+                    <div class="btn-title">Produk Nomor Kosong</div>
+                    <div class="btn-desc">Akun Telegram Noktel dan layanan verifikasi</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Script Section -->
+        <div class="content-section" id="script">
+            <h2 class="section-title">Link Script</h2>
+            <div class="script-list">
+                <a href="#" class="script-item">
+                    <div class="script-name">WhatsApp Bot Multi Device</div>
+                    <div class="script-desc">Script bot WhatsApp dengan support multi device dan fitur lengkap</div>
+                </a>
+                <a href="#" class="script-item">
+                    <div class="script-name">Telegram UserBot</div>
+                    <div class="script-desc">Automation tools untuk Telegram dengan API capabilities</div>
+                </a>
+                <a href="#" class="script-item">
+                    <div class="script-name">Web Dashboard Admin</div>
+                    <div class="script-desc">Dashboard untuk monitoring dan management system</div>
+                </a>
+                <a href="#" class="script-item">
+                    <div class="script-name">API Integration Kit</div>
+                    <div class="script-desc">Kumpulan API untuk berbagai platform dan services</div>
+                </a>
+                <a href="#" class="script-item">
+                    <div class="script-name">Function Bug Collection</div>
+                    <div class="script-desc">Koleksi function crash, bug, dan exploit tools</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Back Button -->
+        <div style="text-align: center; padding: 2rem;">
+            <a href="index.html" class="back-btn">
+                ← Back to Home
+            </a>
+        </div>
     </div>
 
     <script>
-        // Add loading animation to buttons
-        document.addEventListener('DOMContentLoaded', function() {
-            const buttons = document.querySelectorAll('.product-btn');
-            buttons.forEach((button, index) => {
-                button.style.animationDelay = `${index * 0.1}s`;
-                button.style.animation = 'slideUpFade 0.6s ease-out both';
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
             });
-        });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
     </script>
 </body>
-</html>
+                    </html>
