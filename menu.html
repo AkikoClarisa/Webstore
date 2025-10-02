@@ -1,135 +1,383 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aether Hub - Menu</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: Arial, sans-serif;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 20px;
+            padding: 1rem;
+            color: white;
         }
+
         .container {
             max-width: 800px;
             margin: 0 auto;
-            background: white;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .store-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .store-title h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: rgba(255,255,255,0.1);
             border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            margin-bottom: 2rem;
+            padding: 5px;
         }
-        h1 { 
-            text-align: center; 
-            color: #333;
-            margin-bottom: 30px;
-        }
-        .nav { 
-            display: flex; 
-            margin-bottom: 20px;
-            border-bottom: 2px solid #eee;
-        }
-        .nav-btn { 
-            flex: 1; 
-            padding: 15px;
+
+        .tab {
+            flex: 1;
+            padding: 1rem;
             text-align: center;
-            background: none;
-            border: none;
             cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            color: #666;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            font-weight: 600;
         }
-        .nav-btn.active {
-            color: #667eea;
-            border-bottom: 3px solid #667eea;
+
+        .tab.active {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.05);
         }
-        .section { display: none; }
-        .section.active { display: block; }
-        .btn {
+
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .content-section.active {
             display: block;
-            width: 100%;
-            padding: 15px;
-            margin: 10px 0;
-            background: #667eea;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            text-align: center;
-            text-decoration: none;
         }
-        .btn:hover { background: #5a6fd8; }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        /* Contact Buttons */
+        .contact-grid {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .main-btn {
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 1.2rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .main-btn:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-3px);
+        }
+
+        .main-btn .icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .main-btn .name {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .main-btn .desc {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Sub Buttons (Muncul setelah klik) */
+        .sub-buttons {
+            display: none;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+            margin-top: 1rem;
+            animation: slideDown 0.3s ease;
+        }
+
+        .sub-buttons.show {
+            display: grid;
+        }
+
+        .sub-btn {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 0.8rem;
+            border-radius: 10px;
+            text-decoration: none;
+            color: white;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .sub-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Product Buttons */
+        .product-buttons {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .product-btn {
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 1.2rem;
+            border-radius: 15px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .product-btn:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-3px);
+        }
+
+        .product-btn .icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Script Links */
+        .script-list {
+            display: grid;
+            gap: 0.8rem;
+        }
+
+        .script-item {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 1rem;
+            border-radius: 10px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .script-item:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateX(5px);
+        }
+
+        /* Back Button */
         .back-btn {
             display: block;
             text-align: center;
-            margin-top: 20px;
-            color: #667eea;
+            margin-top: 2rem;
+            padding: 1rem 2rem;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 50px;
             text-decoration: none;
-            font-weight: bold;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🛍️ Aether Hub</h1>
-        
-        <div class="nav">
-            <button class="nav-btn active" onclick="showSection('contact')">Kontak Admin</button>
-            <button class="nav-btn" onclick="showSection('product')">Produk</button>
-            <button class="nav-btn" onclick="showSection('script')">Link Script</button>
+        <!-- Store Title -->
+        <div class="store-title">
+            <h1>🛍️ Aether Hub</h1>
         </div>
 
-        <!-- Kontak Section -->
-        <div class="section active" id="contact">
-            <a href="https://t.me/Snitchezs" target="_blank" class="btn">📱 Telegram - Snitchezs</a>
-            <a href="https://t.me/Vrtect" target="_blank" class="btn">📱 Telegram - Vrtect</a>
-            <a href="https://wa.me/6282124169150" target="_blank" class="btn">💬 WhatsApp - +62 821-2416-9150</a>
-            <a href="https://wa.me/62895340154271" target="_blank" class="btn">💬 WhatsApp - +62 895-3401-54271</a>
-            <a href="#" class="btn">🤖 Bot Store - Shop Bot</a>
-            <a href="#" class="btn">🤖 Bot Store - Support Bot</a>
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs">
+            <div class="tab active" onclick="showSection('contact', this)">Kontak Admin</div>
+            <div class="tab" onclick="showSection('product', this)">Produk</div>
+            <div class="tab" onclick="showSection('script', this)">Link Script</div>
         </div>
 
-        <!-- Produk Section -->
-        <div class="section" id="product">
-            <a href="panel.html" class="btn">🖥️ Produk Panel</a>
-            <a href="script.html" class="btn">📜 Produk Script</a>
-            <a href="nokos.html" class="btn">📱 Produk Nomor Kosong</a>
+        <!-- Contact Section -->
+        <div class="content-section active" id="contact">
+            <h2 class="section-title">Kontak Admin</h2>
+            <div class="contact-grid">
+                
+                <!-- Telegram -->
+                <div class="main-btn" onclick="toggleSubButtons('telegram')">
+                    <div class="icon">📱</div>
+                    <div class="name">Telegram</div>
+                    <div class="desc">Click untuk pilih admin</div>
+                    <div class="sub-buttons" id="telegram-buttons">
+                        <a href="https://t.me/Snitchezs" target="_blank" class="sub-btn">👑 Snitchezs</a>
+                        <a href="https://t.me/Vrtect" target="_blank" class="sub-btn">⚡ Vrtect</a>
+                    </div>
+                </div>
+
+                <!-- WhatsApp -->
+                <div class="main-btn" onclick="toggleSubButtons('whatsapp')">
+                    <div class="icon">💬</div>
+                    <div class="name">WhatsApp</div>
+                    <div class="desc">Click untuk pilih admin</div>
+                    <div class="sub-buttons" id="whatsapp-buttons">
+                        <a href="https://wa.me/6282124169150" target="_blank" class="sub-btn">👑 +62 821-2416-9150</a>
+                        <a href="https://wa.me/62895340154271" target="_blank" class="sub-btn">⚡ +62 895-3401-54271</a>
+                    </div>
+                </div>
+
+                <!-- Bot Store -->
+                <div class="main-btn" onclick="toggleSubButtons('botstore')">
+                    <div class="icon">🤖</div>
+                    <div class="name">Bot Store</div>
+                    <div class="desc">Click untuk pilih bot</div>
+                    <div class="sub-buttons" id="botstore-buttons">
+                        <a href="#" class="sub-btn">🛒 Shop Bot</a>
+                        <a href="#" class="sub-btn">🔧 Support Bot</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Product Section -->
+        <div class="content-section" id="product">
+            <h2 class="section-title">Kategori Produk</h2>
+            <div class="product-buttons">
+                <a href="panel.html" class="product-btn">
+                    <div class="icon">🖥️</div>
+                    <div>Produk Panel</div>
+                    <small>Panel unlimited & hosting</small>
+                </a>
+                <a href="script.html" class="product-btn">
+                    <div class="icon">📜</div>
+                    <div>Produk Script</div>
+                    <small>Script bot & automation</small>
+                </a>
+                <a href="nokos.html" class="product-btn">
+                    <div class="icon">📱</div>
+                    <div>Produk Nomor Kosong</div>
+                    <small>Akun Telegram & verifikasi</small>
+                </a>
+            </div>
         </div>
 
         <!-- Script Section -->
-        <div class="section" id="script">
-            <a href="#" class="btn">WhatsApp Bot Multi Device</a>
-            <a href="#" class="btn">Telegram UserBot</a>
-            <a href="#" class="btn">Web Dashboard Admin</a>
-            <a href="#" class="btn">API Integration Kit</a>
-            <a href="#" class="btn">Function Bug Collection</a>
+        <div class="content-section" id="script">
+            <h2 class="section-title">Link Script</h2>
+            <div class="script-list">
+                <a href="#" class="script-item">
+                    <div><strong>WhatsApp Bot Multi Device</strong></div>
+                    <small>Script bot WhatsApp dengan fitur lengkap</small>
+                </a>
+                <a href="#" class="script-item">
+                    <div><strong>Telegram UserBot</strong></div>
+                    <small>Automation tools untuk Telegram</small>
+                </a>
+                <a href="#" class="script-item">
+                    <div><strong>Web Dashboard Admin</strong></div>
+                    <small>Dashboard untuk monitoring system</small>
+                </a>
+            </div>
         </div>
 
+        <!-- Back Button -->
         <a href="index.html" class="back-btn">← Back to Home</a>
     </div>
 
     <script>
-        function showSection(sectionName) {
+        // Navigation function
+        function showSection(sectionId, element) {
             // Hide all sections
-            document.querySelectorAll('.section').forEach(section => {
+            document.querySelectorAll('.content-section').forEach(section => {
                 section.classList.remove('active');
             });
             
-            // Remove active class from all buttons
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('active');
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
             });
             
             // Show selected section
-            document.getElementById(sectionName).classList.add('active');
+            document.getElementById(sectionId).classList.add('active');
             
-            // Add active class to clicked button
-            event.target.classList.add('active');
+            // Add active class to clicked tab
+            element.classList.add('active');
+            
+            // Close all sub buttons when switching sections
+            closeAllSubButtons();
         }
-        
+
+        // Toggle sub buttons
+        function toggleSubButtons(type) {
+            const subButtons = document.getElementById(type + '-buttons');
+            const isVisible = subButtons.classList.contains('show');
+            
+            // Close all other sub buttons first
+            closeAllSubButtons();
+            
+            // Toggle current one
+            if (!isVisible) {
+                subButtons.classList.add('show');
+            }
+        }
+
+        // Close all sub buttons
+        function closeAllSubButtons() {
+            document.querySelectorAll('.sub-buttons').forEach(buttons => {
+                buttons.classList.remove('show');
+            });
+        }
+
+        // Close sub buttons when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.main-btn')) {
+                closeAllSubButtons();
+            }
+        });
+
         console.log('Website loaded successfully!');
     </script>
 </body>
