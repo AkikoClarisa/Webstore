@@ -430,7 +430,7 @@
 </head>
 <body>
     <!-- Overlay untuk background blur -->
-    <div class="overlay" id="overlay" onclick="closeAllAdminMenus()"></div>
+    <div class="overlay" id="overlay"></div>
 
     <div class="menu-container">
         <!-- Store Title -->
@@ -440,9 +440,9 @@
 
         <!-- Horizontal Navigation Tabs -->
         <div class="nav-tabs">
-            <div class="tab active" onclick="showSection('contact')">Kontak Admin</div>
-            <div class="tab" onclick="showSection('product')">Produk</div>
-            <div class="tab" onclick="showSection('script')">Link Script</div>
+            <div class="tab active" onclick="showSection('contact', this)">Kontak Admin</div>
+            <div class="tab" onclick="showSection('product', this)">Produk</div>
+            <div class="tab" onclick="showSection('script', this)">Link Script</div>
         </div>
 
         <!-- Contact Section -->
@@ -580,7 +580,7 @@
     <script>
         let activeMenu = null;
 
-        function showSection(sectionId) {
+        function showSection(sectionId, element) {
             // Hide all sections
             document.querySelectorAll('.content-section').forEach(section => {
                 section.classList.remove('active');
@@ -595,7 +595,7 @@
             document.getElementById(sectionId).classList.add('active');
             
             // Add active class to clicked tab
-            event.target.classList.add('active');
+            element.classList.add('active');
             
             // Close any open admin menu
             closeAllAdminMenus();
@@ -612,11 +612,10 @@
             overlay.classList.add('active');
             menu.classList.add('active');
             activeMenu = menu;
-            
-            // Prevent event bubbling
-            event.stopPropagation();
         }
 
         function closeAdminMenu(menuType) {
             const menu = document.getElementById(menuType + 'Menu');
-            con
+            const overlay = document.getElementById('overlay');
+            
+            menu.classList.remove('
