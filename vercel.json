@@ -17,6 +17,10 @@
       "destination": "/script.html"
     },
     {
+      "source": "/menu",
+      "destination": "/menu.html"
+    },
+    {
       "source": "/nokos",
       "destination": "/nokos.html"
     }

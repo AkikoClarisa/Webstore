@@ -102,6 +102,19 @@
             color: white;
             font-size: 3rem;
             margin: 0 auto 2rem auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-img.loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: loadingShine 1.5s infinite;
         }
 
         .profile-img:hover {
@@ -211,6 +224,11 @@
             }
         }
 
+        @keyframes loadingShine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
         /* Background effects */
         body::before {
             content: '';
@@ -239,7 +257,7 @@
     <div class="stars-container" id="starsContainer"></div>
     
     <div class="intro-container">
-        <div class="profile-img" id="profileImage">
+        <div class="profile-img loading" id="profileImage">
             🛍️
         </div>
         <h1>Aether Hub</h1>
@@ -337,20 +355,50 @@
 
         function loadProfileImage() {
             const profileImg = document.getElementById('profileImage');
-            const testImage = new Image();
             
-            testImage.onload = function() {
-                profileImg.innerHTML = '';
-                profileImg.style.backgroundImage = 'url("https://img1.pixhost.to/images/9251/648784070_proyek-baru-d95b1f4.png")';
-                profileImg.style.backgroundSize = 'cover';
-                profileImg.style.backgroundPosition = 'center';
-            };
-            
-            testImage.onerror = function() {
-                console.log('Using fallback profile image');
-            };
-            
-            testImage.src = 'https://img1.pixhost.to/images/8904/643506796_image.jpg';
+            // Coba load gambar dari berbagai source
+            const imageSources = [
+                'https://img1.pixhost.to/images/8904/643506796_image.jpg',
+                'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face',
+                'https://api.dicebear.com/7.x/avataaars/svg?seed=Aether',
+                './profile.jpg',
+                './images/profile.jpg',
+                './assets/profile.jpg'
+            ];
+
+            let currentIndex = 0;
+
+            function tryNextImage() {
+                if (currentIndex >= imageSources.length) {
+                    console.log('All image sources failed, using fallback');
+                    profileImg.classList.remove('loading');
+                    return;
+                }
+
+                const img = new Image();
+                const source = imageSources[currentIndex];
+                
+                img.onload = function() {
+                    console.log('Image loaded successfully:', source);
+                    profileImg.innerHTML = '';
+                    profileImg.style.backgroundImage = `url("${source}")`;
+                    profileImg.style.backgroundSize = 'cover';
+                    profileImg.style.backgroundPosition = 'center';
+                    profileImg.classList.remove('loading');
+                };
+                
+                img.onerror = function() {
+                    console.log('Failed to load image:', source);
+                    currentIndex++;
+                    setTimeout(tryNextImage, 500); // Coba source berikutnya setelah 500ms
+                };
+                
+                console.log('Trying to load image:', source);
+                img.src = source;
+            }
+
+            // Mulai mencoba load gambar
+            tryNextImage();
         }
 
         window.onload = function() {
