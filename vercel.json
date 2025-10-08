@@ -17,12 +17,13 @@
       "destination": "/script.html"
     },
     {
-      "source": "/menu",
-      "destination": "/menu.html"
+      "source": "/jasa",
+      "destination": "/jasa.html"
     },
     {
       "source": "/nokos",
       "destination": "/nokos.html"
     }
   ]
+
 }
