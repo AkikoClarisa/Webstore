@@ -1,0 +1,20 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/menu.html"
+    },
+    {
+      "source": "/panel",
+      "destination": "/panel.html"
+    },
+    {
+      "source": "/script",
+      "destination": "/script.html"
+    },
+    {
+      "source": "/nokos", 
+      "destination": "/nokos.html"
+    }
+  ]
+}
